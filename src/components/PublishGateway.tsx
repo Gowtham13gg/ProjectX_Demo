@@ -1,4 +1,4 @@
-import React, { type FC } from 'react'
+import React, { type FC, useState } from 'react'
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -11,11 +11,20 @@ interface PublishGatewayProps {
 
 export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
+  const [gateway, setGateway] = useState('tyk');
+  const [consumer, setConsumer] = useState('mobile_app');
+  const [provider, setProvider] = useState('loan');
+  const [providerEndpoint, setProviderEndpoint] = useState('/loan/account');
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here we would handle the API publishing logic
-    alert('API published successfully!');
+    // Show popup with selected data
+    const message = `Selected Configuration:
+    Gateway: ${gateway}
+    Consumer: ${consumer}
+    Provider: ${provider}
+    Provider Endpoint: ${providerEndpoint}`;
+    alert(message);
     navigate('/dashboard');
   };
   return (
@@ -51,18 +60,24 @@ export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkM
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Select Gateway</label>
                   <select
+                    value={gateway}
+                    onChange={(e) => setGateway(e.target.value)}
                     className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    defaultValue="tyk"
                   >
                     <option value="tyk">Tyk</option>
+                    <option value="kong">Kong</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Consumers</label>
                   <select
+                    value={consumer}
+                    onChange={(e) => setConsumer(e.target.value)}
                     className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   >
                     <option value="mobile_app">Mobile app</option>
+                    <option value="internet_banking">Internet banking</option>
+                    <option value="partner">Partner</option>
                   </select>
                 </div>
               </div>
@@ -71,17 +86,22 @@ export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkM
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Provider</label>
                   <select
+                    value={provider}
+                    onChange={(e) => setProvider(e.target.value)}
                     className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   >
-                    <option value="loans">Loans</option>
+                    <option value="loan">Loan</option>
+                    <option value="casa">CASA</option>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="debit_card">Debit Card</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Provider endpoint</label>
                   <Input
                     type="text"
-                    value="/loan/account"
-                    readOnly
+                    value={providerEndpoint}
+                    onChange={(e) => setProviderEndpoint(e.target.value)}
                     className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   />
                 </div>

@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { type FC, useState, useEffect } from 'react'
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -11,6 +11,14 @@ interface CreateAPIProps {
 
 export const CreateAPI: FC<CreateAPIProps> = ({ isDarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
+  const [domain, setDomain] = useState('loan');
+  const [subdomain, setSubdomain] = useState('account');
+  const [action, setAction] = useState('enquiry');
+  const [apiUri, setApiUri] = useState('/loan/account');
+
+  useEffect(() => {
+    setApiUri(`/${domain}/${subdomain}`);
+  }, [domain, subdomain]);
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
       {/* Header */}
@@ -41,27 +49,44 @@ export const CreateAPI: FC<CreateAPIProps> = ({ isDarkMode, setIsDarkMode }) => 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Domain</label>
                 <select
+                  value={domain}
+                  onChange={(e) => setDomain(e.target.value)}
                   className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
                   <option value="loan">Loan</option>
+                  <option value="deposit">Deposit</option>
+                  <option value="cards">Cards</option>
+                  <option value="customer">Customer</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Sub Domain</label>
                 <select
+                  value={subdomain}
+                  onChange={(e) => setSubdomain(e.target.value)}
                   className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
                   <option value="account">Account</option>
+                  <option value="credit">Credit</option>
+                  <option value="debit">Debit</option>
+                  <option value="personal-loan">Personal Loan</option>
+                  <option value="vehicle-loan">Vehicle Loan</option>
+                  <option value="fixed-deposit">Fixed Deposit</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Action</label>
                 <select
+                  value={action}
+                  onChange={(e) => setAction(e.target.value)}
                   className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  <option value="enquire">Enquire</option>
+                  <option value="enquiry">Enquiry</option>
+                  <option value="transaction">Transaction</option>
+                  <option value="update-data">Update Data</option>
+                  <option value="delete">Delete</option>
                 </select>
               </div>
 
@@ -69,8 +94,8 @@ export const CreateAPI: FC<CreateAPIProps> = ({ isDarkMode, setIsDarkMode }) => 
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">API URI</label>
                 <Input
                   type="text"
-                  value="/loan/account"
-                  readOnly
+                  value={apiUri}
+                  onChange={(e) => setApiUri(e.target.value)}
                   className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 />
               </div>
