@@ -1,4 +1,4 @@
-import React from 'react'
+import { type FC } from 'react'
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -8,7 +8,7 @@ interface CreateAPIProps {
   setIsDarkMode: (value: boolean) => void;
 }
 
-export function CreateAPI({ isDarkMode, setIsDarkMode }: CreateAPIProps) {
+export const CreateAPI: FC<CreateAPIProps> = ({ isDarkMode, setIsDarkMode }) => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
       {/* Header */}
@@ -37,53 +37,47 @@ export function CreateAPI({ isDarkMode, setIsDarkMode }: CreateAPIProps) {
             {/* API Creation Form */}
             <form className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">API Name</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="Enter API name"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Description</label>
-                <textarea
-                  className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  rows={4}
-                  placeholder="Enter API description"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Version</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="1.0.0"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Base URL</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  placeholder="https://api.example.com/v1"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Authentication Type</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Domain</label>
                 <select
                   className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 >
-                  <option value="">Select authentication type</option>
-                  <option value="none">None</option>
-                  <option value="basic">Basic Auth</option>
-                  <option value="bearer">Bearer Token</option>
-                  <option value="oauth2">OAuth 2.0</option>
-                  <option value="apikey">API Key</option>
+                  <option value="loan">Loan</option>
                 </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Sub Domain</label>
+                <select
+                  className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                >
+                  <option value="account">Account</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Action</label>
+                <select
+                  className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                >
+                  <option value="enquire">Enquire</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">API URI</label>
+                <Input
+                  type="text"
+                  value="/loan/account"
+                  readOnly
+                  className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Data Model</label>
+                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center">
+                  <p className="text-gray-600 dark:text-gray-400">Drag & Drop</p>
+                </div>
               </div>
 
               <div className="flex justify-end space-x-4">
