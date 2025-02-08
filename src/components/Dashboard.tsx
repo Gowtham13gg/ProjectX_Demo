@@ -1,5 +1,6 @@
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
+import { useNavigate } from 'react-router-dom'
 
 interface DashboardProps {
   isDarkMode: boolean;
@@ -7,9 +8,10 @@ interface DashboardProps {
 }
 
 export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
+  const navigate = useNavigate();
   const sidebarItems = [
     { title: 'API Designer', items: [
-      { title: 'Create New API', href: '#/create-api' },
+      { title: 'Create New API', href: '/create-api' },
       { title: 'Update Existing API', href: '#' },
       { title: 'Data Dictionary', href: '#' },
       { title: 'Providers', href: '#' },
@@ -79,12 +81,12 @@ export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
                   <ul className="space-y-1 pl-4">
                     {item.items.map((subItem, subIndex) => (
                       <li key={subIndex}>
-                        <a
-                          href={subItem.href}
-                          className="block px-2 py-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors text-sm font-['Inter']"
+                        <button
+                          onClick={() => navigate(subItem.href)}
+                          className="block w-full text-left px-2 py-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors text-sm font-['Inter']"
                         >
                           {subItem.title}
-                        </a>
+                        </button>
                       </li>
                     ))}
                   </ul>
