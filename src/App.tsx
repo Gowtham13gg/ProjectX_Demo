@@ -4,6 +4,7 @@ import { Button } from "./components/ui/button"
 import { ChevronDown, Moon, Sun } from "lucide-react"
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import { Dashboard } from './components/Dashboard'
+import { CreateAPI } from './components/CreateAPI'
 
 export function Login({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) {
   const navigate = useNavigate();
@@ -198,6 +199,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
         <Route path="/dashboard" element={<Dashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+        <Route path="/create-api" element={<CreateAPI isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
       </Routes>
     </Router>
   )

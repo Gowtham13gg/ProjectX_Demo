@@ -9,7 +9,7 @@ interface DashboardProps {
 export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
   const sidebarItems = [
     { title: 'API Designer', items: [
-      { title: 'Create New API', href: '#' },
+      { title: 'Create New API', href: '/create-api' },
       { title: 'Update Existing API', href: '#' },
       { title: 'Data Dictionary', href: '#' },
       { title: 'Providers', href: '#' },
@@ -74,30 +74,21 @@ export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
           <ul className="space-y-4">
             {sidebarItems.map((item, index) => (
               <li key={index}>
-                {item.items ? (
-                  <div className="space-y-2">
-                    <h3 className="text-gray-900 dark:text-gray-100 font-semibold font-['Inter']">{item.title}</h3>
-                    <ul className="space-y-1 pl-4">
-                      {item.items.map((subItem, subIndex) => (
-                        <li key={subIndex}>
-                          <a
-                            href={subItem.href}
-                            className="block px-2 py-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors text-sm font-['Inter']"
-                          >
-                            {subItem.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors font-['Inter']"
-                  >
-                    {item.title}
-                  </a>
-                )}
+                <div className="space-y-2">
+                  <h3 className="text-gray-900 dark:text-gray-100 font-semibold font-['Inter']">{item.title}</h3>
+                  <ul className="space-y-1 pl-4">
+                    {item.items.map((subItem, subIndex) => (
+                      <li key={subIndex}>
+                        <a
+                          href={subItem.href}
+                          className="block px-2 py-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors text-sm font-['Inter']"
+                        >
+                          {subItem.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </li>
             ))}
           </ul>
