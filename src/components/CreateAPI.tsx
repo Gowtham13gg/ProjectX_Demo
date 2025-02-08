@@ -76,7 +76,7 @@ export const CreateAPI: FC<CreateAPIProps> = ({ isDarkMode, setIsDarkMode }) => 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Data Model</label>
                 <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center">
-                  <p className="text-gray-600 dark:text-gray-400">Drag & Drop</p>
+                  <p className="text-gray-600 dark:text-gray-400">Drag &amp; Drop</p>
                 </div>
               </div>
 
