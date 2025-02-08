@@ -27,20 +27,63 @@ export const PublishGateway: FC<PublishGatewayProps> = ({
   const [provider, setProvider] = useState('loan');
   const [providerEndpoint, setProviderEndpoint] = useState('/loan/account');
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Show popup with selected data
-    const message = `Selected Configuration:
-    Domain: ${domain}
-    Subdomain: ${subdomain}
-    Action: ${action}
-    API URI: ${apiUri}
-    Gateway: ${gateway}
-    Consumer: ${consumer}
-    Provider: ${provider}
-    Provider Endpoint: ${providerEndpoint}`;
-    alert(message);
-    navigate('/dashboard');
+    
+    // Prepare data model for API
+    const apiData = {
+      gateway: gateway,
+      apiName: "SampleProject1",
+      apiId: `${domain}_V1_${subdomain}`,
+      action: "New",
+      active: true,
+      proxy: {
+        listenPath: apiUri,
+        targetUrl: "http://host.docker.internal:5155/routing"
+      },
+      customPaths: [{
+        action: "New",
+        path: action,
+        method: "Get"
+      }]
+    };
+
+    try {
+      // Send data to API endpoint
+      const response = await fetch('http://localhost:5155/routing', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(apiData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      // Show success popup with selected data and API response
+      const message = `API Configuration Successfully Published!
+      
+      Domain: ${domain}
+      Subdomain: ${subdomain}
+      Action: ${action}
+      API URI: ${apiUri}
+      Gateway: ${gateway}
+      Consumer: ${consumer}
+      Provider: ${provider}
+      Provider Endpoint: ${providerEndpoint}
+      
+      API Response:
+      ${JSON.stringify(result, null, 2)}`;
+      
+      alert(message);
+      navigate('/dashboard');
+    } catch (error) {
+      alert(`Failed to publish API configuration: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
   };
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
