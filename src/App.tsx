@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react'
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import React, { useState, useEffect } from 'react'
+import { Input } from "./components/ui/input"
+import { Button } from "./components/ui/button"
 import { ChevronDown, Moon, Sun } from "lucide-react"
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import { Dashboard } from './components/Dashboard'
+import { CreateAPI } from './components/CreateAPI'
+import { Contract } from './components/Contract'
+import { PublishGateway } from './components/PublishGateway'
 
 export function Login({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) {
   const navigate = useNavigate();
@@ -67,7 +70,7 @@ export function Login({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setI
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
       {/* Header */}
       <header className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow-md transition-colors">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-blue-400 font-['Poppins']">Brand Name</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-blue-400 font-['Poppins']">ProjectX</h1>
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
@@ -75,9 +78,9 @@ export function Login({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setI
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          <div className="flex items-center gap-2">
-            <span className="text-gray-600 dark:text-gray-400">Powered by</span>
-            <span className="font-bold text-gray-800 dark:text-white">Project X</span>
+          <div className="flex flex-col items-end">
+            <span className="text-xs text-gray-600 dark:text-gray-400 mb-0.5">Powered by</span>
+            <span className="text-sm font-bold text-gray-800 dark:text-white tracking-wide">theapimasters.com</span>
           </div>
         </div>
       </header>
@@ -181,6 +184,10 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'light' ? false : true
   })
+  const [domain, setDomain] = useState('loan')
+  const [subdomain, setSubdomain] = useState('account')
+  const [action, setAction] = useState('enquiry')
+  const [apiUri, setApiUri] = useState('/loan/account')
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -198,6 +205,37 @@ function App() {
       <Routes>
         <Route path="/" element={<Login isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
         <Route path="/dashboard" element={<Dashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+        <Route 
+          path="/create-api" 
+          element={
+            <CreateAPI 
+              isDarkMode={isDarkMode} 
+              setIsDarkMode={setIsDarkMode}
+              domain={domain}
+              setDomain={setDomain}
+              subdomain={subdomain}
+              setSubdomain={setSubdomain}
+              action={action}
+              setAction={setAction}
+              apiUri={apiUri}
+              setApiUri={setApiUri}
+            />
+          }
+        />
+        <Route path="/contract" element={<Contract isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+        <Route 
+          path="/publish-gateway" 
+          element={
+            <PublishGateway 
+              isDarkMode={isDarkMode} 
+              setIsDarkMode={setIsDarkMode}
+              domain={domain}
+              subdomain={subdomain}
+              action={action}
+              apiUri={apiUri}
+            />
+          }
+        />
       </Routes>
     </Router>
   )

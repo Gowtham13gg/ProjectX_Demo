@@ -1,5 +1,6 @@
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
+import { useNavigate } from 'react-router-dom'
 
 interface DashboardProps {
   isDarkMode: boolean;
@@ -7,19 +8,41 @@ interface DashboardProps {
 }
 
 export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
+  const navigate = useNavigate();
   const sidebarItems = [
     { title: 'API Designer', items: [
-      { title: 'Create New API', href: '#' },
+      { title: 'Create New API', href: '/create-api' },
       { title: 'Update Existing API', href: '#' },
       { title: 'Data Dictionary', href: '#' },
       { title: 'Providers', href: '#' },
       { title: 'Consumers', href: '#' }
     ]},
-    { title: 'Test Studio', href: '#' },
-    { title: 'Developers Portal', href: '#' },
-    { title: 'Monitoring', href: '#' },
-    { title: 'Catalog', href: '#' },
-    { title: 'Workflow', href: '#' }
+    { title: 'Test Studio', items: [
+      { title: 'Create Test Case', href: '#' },
+      { title: 'Run Tests', href: '#' },
+      { title: 'Test Reports', href: '#' },
+      { title: 'Test History', href: '#' }
+    ]},
+    { title: 'Developers Portal', items: [
+      { title: 'Documentation', href: '#' },
+      { title: 'API Explorer', href: '#' },
+      { title: 'Code Samples', href: '#' }
+    ]},
+    { title: 'Monitoring', items: [
+      { title: 'Dashboard', href: '#' },
+      { title: 'Alerts', href: '#' },
+      { title: 'Reports', href: '#' }
+    ]},
+    { title: 'Catalog', items: [
+      { title: 'Browse APIs', href: '#' },
+      { title: 'Categories', href: '#' },
+      { title: 'Search', href: '#' }
+    ]},
+    { title: 'Workflow', items: [
+      { title: 'Approvals', href: '#' },
+      { title: 'Tasks', href: '#' },
+      { title: 'History', href: '#' }
+    ]}
   ]
 
   const tableData = [
@@ -32,7 +55,7 @@ export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
       {/* Header */}
       <header className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow-md transition-colors">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-blue-400 font-['Poppins']">Brand Name</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-blue-400 font-['Poppins']">ProjectX</h1>
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
@@ -40,9 +63,9 @@ export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          <div className="flex items-center gap-2">
-            <span className="text-gray-600 dark:text-gray-400">Powered by</span>
-            <span className="font-bold text-gray-800 dark:text-white">Project X</span>
+          <div className="flex flex-col items-end">
+            <span className="text-xs text-gray-600 dark:text-gray-400 mb-0.5">Powered by</span>
+            <span className="text-sm font-bold text-gray-800 dark:text-white tracking-wide">theapimasters.com</span>
           </div>
         </div>
       </header>
@@ -53,30 +76,21 @@ export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
           <ul className="space-y-4">
             {sidebarItems.map((item, index) => (
               <li key={index}>
-                {item.items ? (
-                  <div className="space-y-2">
-                    <h3 className="text-gray-900 dark:text-gray-100 font-semibold font-['Inter']">{item.title}</h3>
-                    <ul className="space-y-1 pl-4">
-                      {item.items.map((subItem, subIndex) => (
-                        <li key={subIndex}>
-                          <a
-                            href={subItem.href}
-                            className="block px-2 py-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors text-sm font-['Inter']"
-                          >
-                            {subItem.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors font-['Inter']"
-                  >
-                    {item.title}
-                  </a>
-                )}
+                <div className="space-y-2">
+                  <h3 className="text-gray-900 dark:text-gray-100 font-semibold font-['Inter']">{item.title}</h3>
+                  <ul className="space-y-1 pl-4">
+                    {item.items.map((subItem, subIndex) => (
+                      <li key={subIndex}>
+                        <button
+                          onClick={() => navigate(subItem.href)}
+                          className="block w-full text-left px-2 py-1 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-md transition-colors text-sm font-['Inter']"
+                        >
+                          {subItem.title}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </li>
             ))}
           </ul>
