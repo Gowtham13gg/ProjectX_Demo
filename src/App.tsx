@@ -5,6 +5,8 @@ import { ChevronDown, Moon, Sun } from "lucide-react"
 import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import { Dashboard } from './components/Dashboard'
 import { CreateAPI } from './components/CreateAPI'
+import { Contract } from './components/Contract'
+import { PublishGateway } from './components/PublishGateway'
 
 export function Login({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setIsDarkMode: (value: boolean) => void }) {
   const navigate = useNavigate();
@@ -200,6 +202,8 @@ function App() {
         <Route path="/" element={<Login isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
         <Route path="/dashboard" element={<Dashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
         <Route path="/create-api" element={<CreateAPI isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+        <Route path="/contract" element={<Contract isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+        <Route path="/publish-gateway" element={<PublishGateway isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
       </Routes>
     </Router>
   )

@@ -2,6 +2,7 @@ import { type FC } from 'react'
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
+import { useNavigate } from 'react-router-dom'
 
 interface CreateAPIProps {
   isDarkMode: boolean;
@@ -9,6 +10,7 @@ interface CreateAPIProps {
 }
 
 export const CreateAPI: FC<CreateAPIProps> = ({ isDarkMode, setIsDarkMode }) => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
       {/* Header */}
@@ -88,8 +90,9 @@ export const CreateAPI: FC<CreateAPIProps> = ({ isDarkMode, setIsDarkMode }) => 
                   Cancel
                 </Button>
                 <Button
-                  type="submit"
+                  type="button"
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+                  onClick={() => navigate('/contract')}
                 >
                   Create API
                 </Button>
