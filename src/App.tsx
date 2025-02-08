@@ -75,9 +75,9 @@ export function Login({ isDarkMode, setIsDarkMode }: { isDarkMode: boolean; setI
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          <div className="flex items-center gap-2">
-            <span className="text-gray-600 dark:text-gray-400">Powered by</span>
-            <span className="font-bold text-gray-800 dark:text-white">Project X</span>
+          <div className="flex flex-col items-end">
+            <span className="text-xs text-gray-600 dark:text-gray-400">Powered by</span>
+            <span className="text-sm font-bold text-gray-800 dark:text-white">theapimasters.com</span>
           </div>
         </div>
       </header>
