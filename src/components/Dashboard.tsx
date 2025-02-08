@@ -15,11 +15,32 @@ export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
       { title: 'Providers', href: '#' },
       { title: 'Consumers', href: '#' }
     ]},
-    { title: 'Test Studio', href: '#' },
-    { title: 'Developers Portal', href: '#' },
-    { title: 'Monitoring', href: '#' },
-    { title: 'Catalog', href: '#' },
-    { title: 'Workflow', href: '#' }
+    { title: 'Test Studio', items: [
+      { title: 'Create Test Case', href: '#' },
+      { title: 'Run Tests', href: '#' },
+      { title: 'Test Reports', href: '#' },
+      { title: 'Test History', href: '#' }
+    ]},
+    { title: 'Developers Portal', items: [
+      { title: 'Documentation', href: '#' },
+      { title: 'API Explorer', href: '#' },
+      { title: 'Code Samples', href: '#' }
+    ]},
+    { title: 'Monitoring', items: [
+      { title: 'Dashboard', href: '#' },
+      { title: 'Alerts', href: '#' },
+      { title: 'Reports', href: '#' }
+    ]},
+    { title: 'Catalog', items: [
+      { title: 'Browse APIs', href: '#' },
+      { title: 'Categories', href: '#' },
+      { title: 'Search', href: '#' }
+    ]},
+    { title: 'Workflow', items: [
+      { title: 'Approvals', href: '#' },
+      { title: 'Tasks', href: '#' },
+      { title: 'History', href: '#' }
+    ]}
   ]
 
   const tableData = [
