@@ -7,9 +7,20 @@ import { useNavigate } from 'react-router-dom'
 interface PublishGatewayProps {
   isDarkMode: boolean;
   setIsDarkMode: (value: boolean) => void;
+  domain: string;
+  subdomain: string;
+  action: string;
+  apiUri: string;
 }
 
-export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkMode }) => {
+export const PublishGateway: FC<PublishGatewayProps> = ({ 
+  isDarkMode, 
+  setIsDarkMode,
+  domain,
+  subdomain,
+  action,
+  apiUri
+}) => {
   const navigate = useNavigate();
   const [gateway, setGateway] = useState('tyk');
   const [consumer, setConsumer] = useState('mobile_app');
@@ -20,6 +31,10 @@ export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkM
     e.preventDefault();
     // Show popup with selected data
     const message = `Selected Configuration:
+    Domain: ${domain}
+    Subdomain: ${subdomain}
+    Action: ${action}
+    API URI: ${apiUri}
     Gateway: ${gateway}
     Consumer: ${consumer}
     Provider: ${provider}

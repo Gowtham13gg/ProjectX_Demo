@@ -184,6 +184,10 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'light' ? false : true
   })
+  const [domain, setDomain] = useState('loan')
+  const [subdomain, setSubdomain] = useState('account')
+  const [action, setAction] = useState('enquiry')
+  const [apiUri, setApiUri] = useState('/loan/account')
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -201,9 +205,37 @@ function App() {
       <Routes>
         <Route path="/" element={<Login isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
         <Route path="/dashboard" element={<Dashboard isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
-        <Route path="/create-api" element={<CreateAPI isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+        <Route 
+          path="/create-api" 
+          element={
+            <CreateAPI 
+              isDarkMode={isDarkMode} 
+              setIsDarkMode={setIsDarkMode}
+              domain={domain}
+              setDomain={setDomain}
+              subdomain={subdomain}
+              setSubdomain={setSubdomain}
+              action={action}
+              setAction={setAction}
+              apiUri={apiUri}
+              setApiUri={setApiUri}
+            />
+          }
+        />
         <Route path="/contract" element={<Contract isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
-        <Route path="/publish-gateway" element={<PublishGateway isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+        <Route 
+          path="/publish-gateway" 
+          element={
+            <PublishGateway 
+              isDarkMode={isDarkMode} 
+              setIsDarkMode={setIsDarkMode}
+              domain={domain}
+              subdomain={subdomain}
+              action={action}
+              apiUri={apiUri}
+            />
+          }
+        />
       </Routes>
     </Router>
   )
