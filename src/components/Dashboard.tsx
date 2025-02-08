@@ -1,3 +1,4 @@
+import React from 'react'
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
 
@@ -32,7 +33,7 @@ export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
       {/* Header */}
       <header className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow-md transition-colors">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-blue-400 font-['Poppins']">Brand Name</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-blue-400 font-['Poppins']">ProjectX</h1>
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
