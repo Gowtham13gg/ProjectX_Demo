@@ -9,7 +9,7 @@ interface DashboardProps {
 export function Dashboard({ isDarkMode, setIsDarkMode }: DashboardProps) {
   const sidebarItems = [
     { title: 'API Designer', items: [
-      { title: 'Create New API', href: '/create-api' },
+      { title: 'Create New API', href: '#/create-api' },
       { title: 'Update Existing API', href: '#' },
       { title: 'Data Dictionary', href: '#' },
       { title: 'Providers', href: '#' },
