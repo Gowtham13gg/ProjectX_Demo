@@ -1,7 +1,8 @@
-import React, { type FC } from 'react'
+import { type FC } from 'react'
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
+import { useNavigate } from 'react-router-dom'
 
 interface PublishGatewayProps {
   isDarkMode: boolean;
@@ -9,6 +10,14 @@ interface PublishGatewayProps {
 }
 
 export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkMode }) => {
+  const navigate = useNavigate();
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here we would handle the API publishing logic
+    alert('API published successfully!');
+    navigate('/dashboard');
+  };
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:to-blue-900 transition-colors">
       {/* Header */}
@@ -37,12 +46,13 @@ export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkM
             </div>
             
             {/* Gateway Form */}
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-['Inter']">Select Gateway</label>
                   <select
                     className="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    defaultValue="tyk"
                   >
                     <option value="tyk">Tyk</option>
                   </select>
@@ -111,6 +121,7 @@ export const PublishGateway: FC<PublishGatewayProps> = ({ isDarkMode, setIsDarkM
                 </Button>
               </div>
             </form>
+            {/* Success message would be shown here */}
           </div>
         </main>
       </div>
