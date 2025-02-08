@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Input } from "./components/ui/input"
 import { Button } from "./components/ui/button"
 import { ChevronDown, Moon, Sun } from "lucide-react"
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import { Dashboard } from './components/Dashboard'
 import { CreateAPI } from './components/CreateAPI'
 
