@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import React, { type FC } from 'react'
 import { Moon, Sun } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
